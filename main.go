@@ -20,7 +20,7 @@ func main() {
 	log.Println("Starting crawlers...")
 
 	// how many appends and pops to run (8000 already makes my machine cry and show how incable david is)
-	count := 800
+	count := 8000
 
 	// i know, wg is useless at the moment, but i was using ok
 	var wg sync.WaitGroup
@@ -28,9 +28,7 @@ func main() {
 	// jorge adds everything he can
 	wg.Add(1)
 	jorge := crawler.NewCrawler("http://localhost:8080/queue/add", count)
-	go jorge.Run(&wg)
-
-	time.Sleep(1 * time.Second)
+	jorge.Run(&wg)
 
 	// david tries to remove everything that jorge added, but he have just 1 second to do this
 	wg.Add(1)
